@@ -128,10 +128,9 @@ def calc_temps(start):
     # Create our session (link) from Python to the DB
     session = Session(engine)
     
-    canonicalized = start.replace(" ", " ").lower()
-    search_term =(Measurement.date).replace(" ", " ").lower()
+    canonicalized = start.replace(" ", " ")
     results = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
-        filter(Measurement.date >=search_term).all()
+        filter(Measurement.date >=start).all()
 
     return jsonify(results)
 
